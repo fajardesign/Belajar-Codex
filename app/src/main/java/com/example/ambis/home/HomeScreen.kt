@@ -34,9 +34,6 @@ import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
-import androidx.compose.material.pullrefresh.PullRefreshIndicator
-import androidx.compose.material.pullrefresh.pullRefresh
-import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
@@ -48,6 +45,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -74,6 +73,7 @@ import com.google.accompanist.placeholder.material3.shimmer
 import java.text.NumberFormat
 import java.util.Locale
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeRoute(
     state: HomeUiState,
@@ -82,7 +82,7 @@ fun HomeRoute(
     onNavigate: (Dest) -> Unit,
     onRefresh: () -> Unit
 ) {
-    val pullRefreshState = rememberPullRefreshState(refreshing = refreshing, onRefresh = onRefresh)
+    val pullToRefreshState = rememberPullToRefreshState()
 
     Scaffold(
         topBar = {
@@ -95,31 +95,30 @@ fun HomeRoute(
             HomeBottomBar(current = Dest.Home, onNavigate = onNavigate)
         }
     ) { padding ->
-        Box(
+        PullToRefreshBox(
             modifier = Modifier
                 .padding(padding)
-                .fillMaxSize()
-                .pullRefresh(pullRefreshState)
-                .background(MaterialTheme.colorScheme.background)
+                .fillMaxSize(),
+            isRefreshing = refreshing,
+            onRefresh = onRefresh,
+            state = pullToRefreshState
         ) {
-            when (state) {
-                HomeUiState.Loading -> HomeSkeleton()
-                is HomeUiState.Error -> HomeError(message = state.message, onRetry = onRefresh)
-                HomeUiState.Offline -> OfflineNotice(onRetry = onRefresh)
-                is HomeUiState.Loaded -> HomeContent(
-                    state = state,
-                    onToggleVisible = onToggleVisible,
-                    onNavigate = onNavigate
-                )
-            }
-
-            PullRefreshIndicator(
-                refreshing = refreshing,
-                state = pullRefreshState,
+            Box(
                 modifier = Modifier
-                    .align(Alignment.TopCenter)
-                    .padding(top = 16.dp)
-            )
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background)
+            ) {
+                when (state) {
+                    HomeUiState.Loading -> HomeSkeleton()
+                    is HomeUiState.Error -> HomeError(message = state.message, onRetry = onRefresh)
+                    HomeUiState.Offline -> OfflineNotice(onRetry = onRefresh)
+                    is HomeUiState.Loaded -> HomeContent(
+                        state = state,
+                        onToggleVisible = onToggleVisible,
+                        onNavigate = onNavigate
+                    )
+                }
+            }
         }
     }
 }

@@ -82,5 +82,4 @@ dependencies {
     // coreLibraryDesugaring tidak diperlukan jika sudah Java 17
     // coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
 
-    implementation("com.google.accompanist:accompanist-placeholder-material3:0.36.0")
 }

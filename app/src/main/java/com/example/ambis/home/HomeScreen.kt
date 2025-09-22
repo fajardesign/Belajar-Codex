@@ -1,6 +1,7 @@
 package com.example.ambis.home
 
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -25,6 +26,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.placeholder.PlaceholderHighlight
+import androidx.compose.foundation.placeholder.placeholder
+import androidx.compose.foundation.placeholder.shimmer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountBalance
 import androidx.compose.material.icons.outlined.AccountCircle
@@ -56,6 +60,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -67,9 +72,6 @@ import androidx.compose.ui.unit.sp
 import com.example.ambis.model.ActionItem
 import com.example.ambis.model.Dest
 import com.example.ambis.model.ServiceItem
-import com.google.accompanist.placeholder.material3.PlaceholderHighlight
-import com.google.accompanist.placeholder.material3.placeholder
-import com.google.accompanist.placeholder.material3.shimmer
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -240,6 +242,7 @@ private fun HomeBottomBar(
     }
 }
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 private fun BalanceCard(
     company: String,

@@ -66,8 +66,11 @@ class HomeViewModel(
     fun refresh(force: Boolean) {
         viewModelScope.launch(ioDispatcher) {
             _refreshing.value = true
-            fetchData(force)
-            _refreshing.value = false
+            try {
+                fetchData(force)
+            } finally {
+                _refreshing.value = false
+            }
         }
     }
 

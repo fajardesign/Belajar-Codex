@@ -26,9 +26,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.placeholder.PlaceholderHighlight
-import androidx.compose.foundation.placeholder.placeholder
-import androidx.compose.foundation.placeholder.shimmer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountBalance
 import androidx.compose.material.icons.outlined.AccountCircle
@@ -551,7 +548,6 @@ private fun HomeSkeleton() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(160.dp)
-                    .placeholder(visible = true, highlight = PlaceholderHighlight.shimmer())
             ) {}
         }
     }

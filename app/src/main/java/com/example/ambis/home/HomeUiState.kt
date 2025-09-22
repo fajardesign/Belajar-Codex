@@ -3,8 +3,8 @@ package com.example.ambis.home
 import com.example.ambis.model.ActionItem
 import com.example.ambis.model.ServiceItem
 
-sealed interface HomeUiState {
-    data object Loading : HomeUiState
+sealed class HomeUiState {
+    data object Loading : HomeUiState()
 
     data class Loaded(
         val company: String,
@@ -14,9 +14,9 @@ sealed interface HomeUiState {
         val quick: List<ActionItem>,
         val services: List<ServiceItem>,
         val hasUnread: Boolean
-    ) : HomeUiState
+    ) : HomeUiState()
 
-    data class Error(val message: String) : HomeUiState
+    data class Error(val message: String) : HomeUiState()
 
-    data object Offline : HomeUiState
+    data object Offline : HomeUiState()
 }

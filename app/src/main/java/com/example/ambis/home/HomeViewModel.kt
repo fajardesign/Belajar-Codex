@@ -45,9 +45,6 @@ class HomeViewModel(
     private val _uiState = MutableStateFlow<HomeUiState>(HomeUiState.Loading)
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
 
-    private val _refreshing = MutableStateFlow(false)
-    val refreshing: StateFlow<Boolean> = _refreshing.asStateFlow()
-
     private val _navigation = MutableSharedFlow<Dest>(extraBufferCapacity = 1)
     val navigation = _navigation.asSharedFlow()
 
@@ -65,9 +62,7 @@ class HomeViewModel(
 
     fun refresh(force: Boolean) {
         viewModelScope.launch(ioDispatcher) {
-            _refreshing.value = true
             fetchData(force)
-            _refreshing.value = false
         }
     }
 

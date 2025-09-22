@@ -29,14 +29,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             AmbisTheme {
                 val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-                val refreshing by viewModel.refreshing.collectAsStateWithLifecycle()
-
                 SecureWindowEffect(showSecure = (uiState as? com.example.ambis.home.HomeUiState.Loaded)?.visible == true)
 
                 Surface(modifier = Modifier.fillMaxSize()) {
                     HomeRoute(
                         state = uiState,
-                        refreshing = refreshing,
                         onToggleVisible = viewModel::toggleBalanceVisibility,
                         onNavigate = viewModel::onNavigate,
                         onRefresh = { viewModel.refresh(force = true) }

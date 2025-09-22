@@ -34,9 +34,6 @@ import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
-import androidx.compose.material.pullrefresh.PullRefreshIndicator
-import androidx.compose.material.pullrefresh.pullRefresh
-import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
@@ -52,7 +49,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -67,20 +63,16 @@ import androidx.compose.ui.unit.sp
 import com.example.ambis.model.ActionItem
 import com.example.ambis.model.Dest
 import com.example.ambis.model.ServiceItem
-import com.google.accompanist.placeholder.material3.PlaceholderHighlight
-import com.google.accompanist.placeholder.material3.placeholder
 import java.text.NumberFormat
 import java.util.Locale
 
 @Composable
 fun HomeRoute(
     state: HomeUiState,
-    refreshing: Boolean,
     onToggleVisible: () -> Unit,
     onNavigate: (Dest) -> Unit,
     onRefresh: () -> Unit
 ) {
-    val pullRefreshState = rememberPullRefreshState(refreshing = refreshing, onRefresh = onRefresh)
 
     Scaffold(
         topBar = {
@@ -97,7 +89,6 @@ fun HomeRoute(
             modifier = Modifier
                 .padding(padding)
                 .fillMaxSize()
-                .pullRefresh(pullRefreshState)
                 .background(MaterialTheme.colorScheme.background)
         ) {
             when (state) {
@@ -110,14 +101,6 @@ fun HomeRoute(
                     onNavigate = onNavigate
                 )
             }
-
-            PullRefreshIndicator(
-                refreshing = refreshing,
-                state = pullRefreshState,
-                modifier = Modifier
-                    .align(Alignment.TopCenter)
-                    .padding(top = 16.dp)
-            )
         }
     }
 }
@@ -547,7 +530,6 @@ private fun HomeSkeleton() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(160.dp)
-                    .placeholder(visible = true, highlight = PlaceholderHighlight.shimmer())
             ) {}
         }
     }

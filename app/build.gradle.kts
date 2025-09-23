@@ -1,11 +1,17 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 android {
     namespace = "com.example.ambis"
     compileSdk = 34
+
+    buildFeatures {
+        compose = true
+        viewBinding = true
+    }
 
     defaultConfig {
         applicationId = "com.example.ambis"
@@ -68,7 +74,6 @@ dependencies {
     implementation("androidx.compose.foundation:foundation")
     implementation("androidx.compose.foundation:foundation-android")
     implementation("androidx.compose.material:material-icons-extended")
-    implementation("androidx.compose.material3:material3-pullrefresh")
 
     // Debug tooling
     debugImplementation("androidx.compose.ui:ui-tooling")
@@ -82,5 +87,9 @@ dependencies {
 
     // coreLibraryDesugaring tidak diperlukan jika sudah Java 17
     // coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
+
+    implementation("com.google.android.material:material:1.13.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui:2.7.7")
 
 }

@@ -18,6 +18,7 @@ import com.example.ambis.home.HomeRoute
 import com.example.ambis.home.HomeViewModel
 import com.example.ambis.ui.theme.AmbisTheme
 import com.example.ambis.util.findActivity
+import androidx.compose.foundation.layout.fillMaxSize
 
 class MainActivity : ComponentActivity() {
 

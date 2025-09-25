@@ -3,4 +3,11 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="content_desc_home_header_background">Ilustrasi latar belakang halaman beranda</string>
+    <string name="content_desc_logo">Logo Amar Bank Bisnis</string>
+    <string name="content_desc_notifications">Buka notifikasi</string>
+    <string name="content_desc_top_up">Menu top up saldo</string>
+    <string name="content_desc_history">Menu riwayat transaksi</string>
+    <string name="content_desc_add_account">Menu tambah rekening</string>
+    <string name="content_desc_transfer">Menu transfer saldo</string>
 </resources>
